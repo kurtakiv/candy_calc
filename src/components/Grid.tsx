@@ -37,6 +37,20 @@ const Grid = () => {
         setTotalSum(totalSum);
         setCandies([...cand]);
     };
+    let copyToBuffer = () => {
+        let reuslt ="";
+
+        candies.forEach(c=>{
+            reuslt+=`${c.name} ${c.count}x${c.price}грн = ${c.sum} грн \n`
+        });
+        reuslt+=`Загальна сума ${totalSum} грн`;
+        navigator.clipboard.writeText(reuslt).then(function() {
+           alert('copied');
+        }, function() {
+            alert('nit');
+        });
+    };
+
     return (
         <div className="grid">
             <div className="grid-body" >
@@ -50,6 +64,7 @@ const Grid = () => {
                 Загальна вартість: {totalSum} грн
             </div>
             <div className="action-bar">
+                <button className="clipboard-button" onClick={()=>copyToBuffer()}>C</button>
                 <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>
         </div>
@@ -105,10 +120,10 @@ const GridRow = (props: any) => {
                 <DropDown selected={_id} onChange={onCandyChanged}/>
             </div>
             <div className="price">
-                <input type="number" value={price} onChange={(e) => priceChange(e)}/>
+                <input type="number" value={price || ""} onChange={(e) => priceChange(e)}/>
             </div>
             <div className="count">
-                <input type="number" value={count} onChange={(e) => countChange(e)}/>
+                <input type="number" value={count || ""} onChange={(e) => countChange(e)}/>
             </div>
             <div className="sum">
                 {sum} грн
