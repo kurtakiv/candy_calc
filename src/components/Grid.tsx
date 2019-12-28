@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import DropDown from './DropDown';
-import {ICandy, ICandyItem} from "../types";
+import {ICandyItem} from "../types";
 import {Candies} from "../consts";
 import './grid.scss';
 
