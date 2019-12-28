@@ -1,0 +1,35 @@
+.grid {
+  border: 1px solid red;
+  font-size: 18px;
+  .grid-row {
+    display: flex;
+
+    .product {
+      flex-grow: 1;
+      padding: 0 5px;
+    }
+
+    .price {
+      width: 50px;
+      padding: 0 5px;
+      input {
+        width: 100%;
+        font-size: inherit;
+      }
+    }
+
+    .count {
+      width: 50px;
+      padding: 0 5px;
+      input {
+        width: 100%;
+        font-size: inherit;
+      }
+    }
+
+    .sum {
+      padding: 0 5px;
+      width: 100px;
+    }
+  }
+}
