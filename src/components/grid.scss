@@ -50,7 +50,11 @@
 
   .grid-row {
     display: flex;
-    padding-top: 4px;
+    padding: 2px 0;
+
+    &:hover {
+      background-color: lighten(#e7afc1, 10%);
+    }
 
     .product {
       flex-grow: 1;

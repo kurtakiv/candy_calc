@@ -3,7 +3,7 @@ import DropDown from './DropDown';
 import {ICandyItem} from "../types";
 import {Candies} from "../consts";
 import './grid.scss';
-
+let buttonPressTimer: any;
 const Grid = () => {
     let cand: ICandyItem[] = [];
     let [candies, setCandies] = useState(cand);
@@ -11,7 +11,7 @@ const Grid = () => {
 
     let AddRow = () => {
         cand = candies;
-        debugger;
+
         cand.push({
             ...Candies[0],
             count: 0,
@@ -37,26 +37,63 @@ const Grid = () => {
         setTotalSum(totalSum);
         setCandies([...cand]);
     };
+
+    let calcTotalSum =()=> {
+        let _totalSum = 0;
+        candies.forEach((c) => {
+            _totalSum += c.sum;
+        });
+
+        setTotalSum(_totalSum);
+    };
+
     let copyToBuffer = () => {
         let reuslt ="";
 
         candies.forEach(c=>{
-            reuslt+=`${c.name} ${c.count}x${c.price}грн = ${c.sum} грн \n`
+            if (c.count >0) {
+                reuslt += `${c.name} ${c.count}x${c.price}грн = ${c.sum} грн \n`
+            }
         });
         reuslt+=`Загальна сума ${totalSum} грн`;
+
         navigator.clipboard.writeText(reuslt).then(function() {
-           alert('copied');
+           console.log('copied')
         }, function() {
-            alert('nit');
+            console.log('failed to copy')
         });
+    };
+
+
+    let handleButtonPress =(index: number) => {
+        buttonPressTimer = setTimeout(() => {
+            let cand = candies;
+            cand.splice(index,1);
+            setCandies([...cand]);
+            calcTotalSum();
+        }, 2000);
+    };
+
+    let handleButtonRelease =()=> {
+        clearTimeout(buttonPressTimer);
     };
 
     return (
         <div className="grid">
             <div className="grid-body" >
                 {
-                    candies.map((c) => {
-                        return <GridRow key={c.uuid} candy={c} onChange={(c: ICandyItem) => changeCandy(c)}/>
+                    candies.map((c,index) => {
+                        return <div key={c.uuid}
+                            onTouchStart={()=>handleButtonPress(index)}
+                            onTouchEnd={handleButtonRelease}
+                            onMouseDown={()=>handleButtonPress(index)}
+                            onMouseUp={handleButtonRelease}
+                            onMouseLeave={handleButtonRelease}>
+                            <GridRow
+                                 candy={c}
+                                 onChange={(c: ICandyItem) => changeCandy(c)}
+                            />
+                        </div>
                     })
                 }
             </div>
@@ -126,7 +163,7 @@ const GridRow = (props: any) => {
                 <input type="number" value={count || ""} onChange={(e) => countChange(e)}/>
             </div>
             <div className="sum">
-                {sum} грн
+                {sum}
             </div>
         </div>
     )
