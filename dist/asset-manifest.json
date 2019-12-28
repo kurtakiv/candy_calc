@@ -1,0 +1,16 @@
+{
+  "files": {
+    "0.chunk.js": "/0.chunk.js",
+    "0.chunk.js.map": "/0.chunk.js.map",
+    "main.js": "/main.chunk.js",
+    "main.js.map": "/main.chunk.js.map",
+    "runtime-main.js": "/bundle.js",
+    "runtime-main.js.map": "/bundle.js.map",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "bundle.js",
+    "0.chunk.js",
+    "main.chunk.js"
+  ]
+}
