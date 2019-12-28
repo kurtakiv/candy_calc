@@ -1,17 +1,54 @@
 .grid {
-  border: 1px solid red;
-  font-size: 18px;
+  font-size: 24px;
+
+  .total-row {
+    margin-top: 10px;
+    text-align: right;
+    padding: 0 25px;
+    background-color: lighten(#e7afc1, 10%);
+  }
+
+  .action-bar {
+    text-align: right;
+    padding: 25px;
+
+    .add-row-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      font-size: 24px;
+      background-color: #e7afc1;
+      outline: none;
+    }
+  }
+
+  .header {
+    font-size: 18px;
+  }
+
+  .total-sum {
+    background-color: #e7afc1;
+
+  }
+
+  .grid-body {
+    height: 80vh;
+    overflow-y: scroll;
+  }
+
   .grid-row {
     display: flex;
 
     .product {
       flex-grow: 1;
       padding: 0 5px;
+      border-color: #e7afc1;
     }
 
     .price {
       width: 50px;
       padding: 0 5px;
+
       input {
         width: 100%;
         font-size: inherit;
@@ -21,6 +58,7 @@
     .count {
       width: 50px;
       padding: 0 5px;
+
       input {
         width: 100%;
         font-size: inherit;
@@ -28,7 +66,7 @@
     }
 
     .sum {
-      padding: 0 5px;
+      padding-left: 5px;
       width: 100px;
     }
   }

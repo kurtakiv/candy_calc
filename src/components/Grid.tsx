@@ -7,6 +7,7 @@ import './grid.scss';
 const Grid = () => {
     let cand: ICandyItem[] = [];
     let [candies, setCandies] = useState(cand);
+    let [totalSum, setTotalSum] = useState(0);
 
     let AddRow = () => {
         cand = candies;
@@ -22,27 +23,40 @@ const Grid = () => {
 
     let changeCandy = (candy: ICandyItem) => {
         cand = candies;
+        let totalSum =0;
+
         cand.forEach((c, index) => {
             if (c.uuid === candy.uuid) {
                 cand[index] = {
                     ...candy
                 };
             }
+            totalSum += cand[index].sum;
         });
+        console.warn(totalSum)
+        setTotalSum(totalSum);
         setCandies([...cand]);
     };
     return (
-
         <div className="grid">
-            <div>
+            <div className="grid-body">
+                <div className="grid-row header">
+                    <div className="product">Продукт</div>
+                    <div className="price">Ціна</div>
+                    <div className="count">К-сть</div>
+                    <div className="sum">Сума</div>
+                </div>
                 {
                     candies.map((c) => {
                         return <GridRow key={c.uuid} candy={c} onChange={(c: ICandyItem) => changeCandy(c)}/>
                     })
                 }
             </div>
-            <div>
-                <button onClick={() => AddRow()}>Click</button>
+            <div className="total-row">
+                Загальна вартість: {totalSum} грн
+            </div>
+            <div className="action-bar">
+                <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>
         </div>
 
@@ -53,8 +67,6 @@ const GridRow = (props: any) => {
     let candy: ICandyItem = props.candy;
 
     let {_id, price, count, sum} = candy;
-
-
 
     let onCandyChanged = (_id: string) => {
         let cand = Candies.find(candy => candy._id === _id);
@@ -78,7 +90,8 @@ const GridRow = (props: any) => {
         props.onChange({
             ...candy,
             count,
-            sum
+            sum,
+            price
         });
     };
 
