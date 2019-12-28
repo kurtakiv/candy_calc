@@ -39,7 +39,7 @@ const Grid = () => {
     };
     return (
         <div className="grid">
-            <div className="grid-body">
+            <div className="grid-body" >
                 <div className="grid-row header">
                     <div className="product">Продукт</div>
                     <div className="price">Ціна</div>
@@ -55,6 +55,7 @@ const Grid = () => {
             <div className="total-row">
                 Загальна вартість: {totalSum} грн
             </div>
+
             <div className="action-bar">
                 <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>
