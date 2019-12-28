@@ -40,12 +40,6 @@ const Grid = () => {
     return (
         <div className="grid">
             <div className="grid-body" >
-                <div className="grid-row header">
-                    <div className="product">Продукт</div>
-                    <div className="price">Ціна</div>
-                    <div className="count">К-сть</div>
-                    <div className="sum">Сума</div>
-                </div>
                 {
                     candies.map((c) => {
                         return <GridRow key={c.uuid} candy={c} onChange={(c: ICandyItem) => changeCandy(c)}/>
@@ -55,7 +49,6 @@ const Grid = () => {
             <div className="total-row">
                 Загальна вартість: {totalSum} грн
             </div>
-
             <div className="action-bar">
                 <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>

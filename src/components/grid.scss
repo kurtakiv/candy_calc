@@ -1,5 +1,5 @@
 .grid {
-  font-size: 24px;
+  font-size: 20px;
 
   .total-row {
     margin-top: 10px;
@@ -33,12 +33,13 @@
   }
 
   .grid-body {
-    height: 80vh;
+    height: 70vh;
     overflow-y: scroll;
   }
 
   .grid-row {
     display: flex;
+    padding-top: 4px;
 
     .product {
       flex-grow: 1;
@@ -47,7 +48,7 @@
     }
 
     .price {
-      width: 50px;
+      width: 60px;
       padding: 0 5px;
 
       input {
@@ -57,7 +58,7 @@
     }
 
     .count {
-      width: 50px;
+      width: 60px;
       padding: 0 5px;
 
       input {
