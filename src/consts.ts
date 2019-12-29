@@ -107,14 +107,24 @@ export const Candies : ICandy[] =[
         price: 24
     },
     {
-        _id: "22",
-        name: 'Шоколадний мус',
-        price: 23
-    },
-    {
         _id: "23",
         name: 'Павлова',
         price: 25
     },
+    {
+        _id: "24",
+        name: 'Торт',
+        price: 500
+    },
+    {
+        _id: "25",
+        name: "Оренда посуду + викладка",
+        price: 500
+    },
+    {
+        _id: "26",
+        name: "Доставка",
+        price: 300
+    }
 
 ];
