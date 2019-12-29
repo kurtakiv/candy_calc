@@ -1,7 +1,8 @@
 export interface ICandy {
     _id: string,
     name: string,
-    price: number
+    price: number,
+    unit: string
 }
 
 export interface ICandyItem extends ICandy {

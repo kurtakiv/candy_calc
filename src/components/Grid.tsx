@@ -49,12 +49,12 @@ const Grid = () => {
 
     let copyToBuffer = () => {
         let reuslt ="";
-        const ignoreCount = ["24", "25", "26"];
+
         candies.forEach(c=>{
             if (c.count >0) {
                 let priceCount = "";
-                if (ignoreCount.indexOf(c._id)=== -1) {
-                    priceCount = `${c.count}шт x ${c.price}грн = `;
+                if (c.unit) {
+                    priceCount = `${c.count}${c.unit} x ${c.price}грн = `;
                 }
 
                 reuslt += `${c.name} ${priceCount}${c.sum} грн \n`
@@ -132,7 +132,8 @@ const GridRow = (props: any) => {
                 ...candy,
                 _id: cand._id,
                 price: cand.price,
-                name: cand.name
+                name: cand.name,
+                unit: cand.unit
             }
         }
         if (candy) {
