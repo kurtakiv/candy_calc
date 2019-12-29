@@ -64,6 +64,11 @@ const Grid = () => {
         });
     };
 
+    let removeAll = () => {
+      if (window.confirm("Видалити все?")) {
+          setCandies([]);
+      }
+    };
 
     let handleButtonPress =(index: number) => {
         buttonPressTimer = setTimeout(() => {
@@ -71,7 +76,7 @@ const Grid = () => {
             cand.splice(index,1);
             setCandies([...cand]);
             calcTotalSum();
-        }, 2000);
+        }, 1500);
     };
 
     let handleButtonRelease =()=> {
@@ -101,6 +106,7 @@ const Grid = () => {
                 Загальна вартість: {totalSum} грн
             </div>
             <div className="action-bar">
+                <button className="remove-button" onClick={()=>removeAll() }>X</button>
                 <button className="clipboard-button" onClick={()=>copyToBuffer()}>C</button>
                 <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>
