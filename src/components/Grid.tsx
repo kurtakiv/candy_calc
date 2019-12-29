@@ -49,10 +49,15 @@ const Grid = () => {
 
     let copyToBuffer = () => {
         let reuslt ="";
-
+        const ignoreCount = ["24", "25", "26"];
         candies.forEach(c=>{
             if (c.count >0) {
-                reuslt += `${c.name} ${c.count}x${c.price}грн = ${c.sum} грн \n`
+                let priceCount = "";
+                if (ignoreCount.indexOf(c._id)=== -1) {
+                    priceCount = `${c.count}x${c.price}грн = `;
+                }
+
+                reuslt += `${c.name} ${priceCount}${c.sum} грн \n`
             }
         });
         reuslt+=`Загальна сума ${totalSum} грн`;
