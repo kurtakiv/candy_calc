@@ -54,7 +54,7 @@ const Grid = () => {
             if (c.count >0) {
                 let priceCount = "";
                 if (ignoreCount.indexOf(c._id)=== -1) {
-                    priceCount = `${c.count}x${c.price}грн = `;
+                    priceCount = `${c.count}шт x ${c.price}грн = `;
                 }
 
                 reuslt += `${c.name} ${priceCount}${c.sum} грн \n`
