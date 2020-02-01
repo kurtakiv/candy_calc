@@ -128,6 +128,12 @@ export const Candies : ICandy[] =[
         unit: "шт"
     },
     {
+        _id: "27",
+        name: 'Фруктовий мус',
+        price: 24,
+        unit: "шт"
+    },
+    {
         _id: "23",
         name: 'Павлова',
         price: 25,
