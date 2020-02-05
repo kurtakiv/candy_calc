@@ -168,11 +168,11 @@ const GridRow = (props: any) => {
             <div className="product">
                 <DropDown selected={_id} onChange={onCandyChanged}/>
             </div>
-            <div className="price">
-                <input type="number" value={price || ""} onChange={(e) => priceChange(e)}/>
-            </div>
             <div className="count">
                 <input type="number" value={count || ""} onChange={(e) => countChange(e)}/>
+            </div>
+            <div className="price">
+                <input type="number" value={price || ""} onChange={(e) => priceChange(e)}/>
             </div>
             <div className="sum">
                 {sum}
