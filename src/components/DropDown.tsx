@@ -7,7 +7,7 @@ const DropDown = ({ selected, onChange}: { selected: string, onChange: any}) => 
        <select className="drop-down" onChange={(e)=> onChange(e.target.value)}>
            {Candies.map((c: ICandy) =>{
               if (c._id === selected) {
-                  return  <option key={c._id} value={c._id} defaultValue={selected}>{c.name}</option>
+                  return  <option key={c._id} value={c._id} selected={true} defaultValue={selected}>{c.name}</option>
               } else {
                   return <option key={c._id} value={c._id}>{c.name}</option>
               }

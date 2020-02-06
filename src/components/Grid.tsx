@@ -1,13 +1,35 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import DropDown from './DropDown';
 import {ICandyItem} from "../types";
 import {Candies} from "../consts";
 import './grid.scss';
+
 let buttonPressTimer: any;
 const Grid = () => {
+    let savedCandies = localStorage.getItem('candies');
     let cand: ICandyItem[] = [];
+    if (savedCandies) {
+        try {
+            let parsedCandies: Array<ICandyItem> = JSON.parse(savedCandies) || [];
+            console.warn(parsedCandies);
+            parsedCandies.forEach((cnd: ICandyItem) => {
+                cand.push(cnd);
+            });
+        } catch (e) {
+            cand = [];
+            console.warn(e);
+        }
+    }
+
+    let getTotalSum = ()=> {
+        let _totalSum = 0;
+        candies.forEach((c) => {
+            _totalSum += c.sum;
+        });
+        return _totalSum;
+    }
     let [candies, setCandies] = useState(cand);
-    let [totalSum, setTotalSum] = useState(0);
+    let [totalSum, setTotalSum] = useState(getTotalSum());
 
     let AddRow = () => {
         cand = candies;
@@ -16,14 +38,15 @@ const Grid = () => {
             ...Candies[0],
             count: 0,
             sum: 0,
-            uuid:  Date.now()
+            uuid: Date.now()
         });
         setCandies([...cand]);
+        saveCandies();
     };
 
     let changeCandy = (candy: ICandyItem) => {
         cand = candies;
-        let totalSum =0;
+        let totalSum = 0;
 
         cand.forEach((c, index) => {
             if (c.uuid === candy.uuid) {
@@ -36,72 +59,75 @@ const Grid = () => {
         console.warn(totalSum)
         setTotalSum(totalSum);
         setCandies([...cand]);
+        saveCandies();
     };
 
-    let calcTotalSum =()=> {
-        let _totalSum = 0;
-        candies.forEach((c) => {
-            _totalSum += c.sum;
-        });
-
-        setTotalSum(_totalSum);
+    let calcTotalSum = () => {
+        setTotalSum(getTotalSum());
     };
+
 
     let copyToBuffer = () => {
-        let reuslt ="";
+        let resuslt = "";
 
-        candies.forEach(c=>{
-            if (c.count >0) {
+        candies.forEach(c => {
+            if (c.count > 0) {
                 let priceCount = "";
                 if (c.unit) {
                     priceCount = `${c.count}${c.unit} x ${c.price}грн = `;
                 }
 
-                reuslt += `${c.name} ${priceCount}${c.sum} грн \n`
+                resuslt += `${c.name} ${priceCount}${c.sum} грн \n`
             }
         });
-        reuslt+=`Загальна сума ${totalSum} грн`;
+        resuslt += `Загальна сума ${totalSum} грн`;
 
-        navigator.clipboard.writeText(reuslt).then(function() {
-           console.log('copied')
-        }, function() {
+        navigator.clipboard.writeText(resuslt).then(function () {
+            console.log('copied')
+        }, function () {
             console.log('failed to copy')
         });
     };
 
     let removeAll = () => {
-      if (window.confirm("Видалити все?")) {
-          setCandies([]);
-      }
+        if (window.confirm("Видалити все?")) {
+            setCandies([]);
+            localStorage.removeItem('candies')
+        }
     };
 
-    let handleButtonPress =(index: number) => {
+    let saveCandies = () => {
+        console.warn('m555');
+        localStorage.setItem('candies', JSON.stringify(candies));
+    };
+
+    let handleButtonPress = (index: number) => {
         buttonPressTimer = setTimeout(() => {
             let cand = candies;
-            cand.splice(index,1);
+            cand.splice(index, 1);
             setCandies([...cand]);
             calcTotalSum();
         }, 1500);
     };
 
-    let handleButtonRelease =()=> {
+    let handleButtonRelease = () => {
         clearTimeout(buttonPressTimer);
     };
 
     return (
         <div className="grid">
-            <div className="grid-body" >
+            <div className="grid-body">
                 {
-                    candies.map((c,index) => {
+                    candies.map((c, index) => {
                         return <div key={c.uuid}
-                            onTouchStart={()=>handleButtonPress(index)}
-                            onTouchEnd={handleButtonRelease}
-                            onMouseDown={()=>handleButtonPress(index)}
-                            onMouseUp={handleButtonRelease}
-                            onMouseLeave={handleButtonRelease}>
+                                    onTouchStart={() => handleButtonPress(index)}
+                                    onTouchEnd={handleButtonRelease}
+                                    onMouseDown={() => handleButtonPress(index)}
+                                    onMouseUp={handleButtonRelease}
+                                    onMouseLeave={handleButtonRelease}>
                             <GridRow
-                                 candy={c}
-                                 onChange={(c: ICandyItem) => changeCandy(c)}
+                                candy={c}
+                                onChange={(c: ICandyItem) => changeCandy(c)}
                             />
                         </div>
                     })
@@ -111,8 +137,8 @@ const Grid = () => {
                 Загальна вартість: {totalSum} грн
             </div>
             <div className="action-bar">
-                <button className="remove-button" onClick={()=>removeAll() }>X</button>
-                <button className="clipboard-button" onClick={()=>copyToBuffer()}>C</button>
+                <button className="remove-button" onClick={() => removeAll()}>X</button>
+                <button className="clipboard-button" onClick={() => copyToBuffer()}>C</button>
                 <button className="add-row-button" onClick={() => AddRow()}>+</button>
             </div>
         </div>
@@ -127,7 +153,7 @@ const GridRow = (props: any) => {
 
     let onCandyChanged = (_id: string) => {
         let cand = Candies.find(candy => candy._id === _id);
-        if (cand){
+        if (cand) {
             candy = {
                 ...candy,
                 _id: cand._id,
@@ -140,9 +166,9 @@ const GridRow = (props: any) => {
             _id = candy._id;
             price = candy.price;
             calcSum();
-        };
+        }
+        ;
     };
-
     let calcSum = () => {
         sum = (Number((count * price).toFixed(2)));
         props.onChange({
