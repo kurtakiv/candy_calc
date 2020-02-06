@@ -97,7 +97,6 @@ const Grid = () => {
     };
 
     let saveCandies = () => {
-        console.warn('m555');
         localStorage.setItem('candies', JSON.stringify(candies));
     };
 
@@ -106,6 +105,7 @@ const Grid = () => {
             let cand = candies;
             cand.splice(index, 1);
             setCandies([...cand]);
+            saveCandies();
             calcTotalSum();
         }, 1500);
     };
