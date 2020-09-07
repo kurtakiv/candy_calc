@@ -26,6 +26,12 @@ export const Candies : ICandy[] =[
         unit: "шт"
     },
     {
+        _id: "27",
+        name: "Міні-капкейки",
+        price: 18,
+        unit: "шт"
+    },
+    {
         _id: "5",
         name: 'Тірамісу ',
         price: 24,
@@ -128,7 +134,7 @@ export const Candies : ICandy[] =[
         unit: "шт"
     },
     {
-        _id: "27",
+        _id: "027",
         name: 'Фруктовий мус',
         price: 24,
         unit: "шт"
@@ -143,6 +149,48 @@ export const Candies : ICandy[] =[
         _id: "28",
         name: 'Снікерс',
         price: 23,
+        unit: "шт"
+    },
+    {
+        _id: "29",
+        name: "Солена карамель",
+        price: 30,
+        unit: "шт"
+    },
+    {
+        _id: "fistashka32",
+        name: "Фісташка",
+        price: 32,
+        unit: "шт"
+    },
+    {
+        _id: "mangoMarakuja",
+        name: "Манго-маракуя",
+        price: 34,
+        unit: "шт"
+    },
+    {
+        _id: "Laim26",
+        name: "Лайм",
+        price: 26,
+        unit: "шт"
+    },
+    {
+        _id: "marakyjaAnanas",
+        name: "Маракуя-ананас",
+        price: 26,
+        unit: "шт"
+    },
+    {
+        _id: "newYork",
+        name: "Чізкейк New York",
+        price: 30,
+        unit: "шт"
+    },
+    {
+        _id: "cloud",
+        name: "Хмаринка",
+        price: 28,
         unit: "шт"
     },
     {
@@ -163,5 +211,6 @@ export const Candies : ICandy[] =[
         price: 300,
         unit: ""
     }
+
 
 ];
